@@ -1,0 +1,184 @@
+@extends('layout.admin.app')
+
+@section('content')
+    @if (session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
+
+    <div class="content-card">
+
+        <div class="div-main-haeds">
+            <h2 class="page-title">Add Question</h2>
+        </div>
+
+        {{-- MAIN FORM --}}
+        <form class="add-ques" action="{{ route('admin.qualification.store-question') }}" method="POST">
+            @csrf
+
+            <div class="row g-3">
+
+                {{-- Question --}}
+                <div class="col-12 col-md-6 top-2">
+                    <label>Enter the Question <span class="text-danger">*</span></label>
+                    <input type="text" name="question" placeholder="Enter your question here"
+                        class="custom-input form-control"
+                        value="{{ old('question') }}">
+                    @error('question')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                {{-- Department --}}
+                <div class="col-12 col-md-6 top-2">
+                    <label>Select Department <span class="text-danger">*</span></label>
+                    <select name="department_id"
+                        class="custom-input form-control">
+                        <option value="">Select Department</option>
+                        @foreach ($departments as $dept)
+                            <option value="{{ $dept->id }}" {{ old('department_id') == $dept->id ? 'selected' : '' }}>
+                                {{ $dept->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('department_id')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
+            </div>
+
+            <div class="top-2 multi-radiios">
+              <label>Select Answer Type <span class="text-danger">*</span></label>
+                <div class="d-flex flex-column flex-md-row gap-3 gap-md-4 answer-type-group">
+                    <label class="answer-type-radio">
+                        <input type="radio" name="answer_type" value="text" id="type_text"
+                            onclick="toggleAnswerFields('text')"
+                            {{ old('answer_type', 'text') == 'text' ? 'checked' : '' }}>
+                        <span>Text</span>
+                    </label>
+                
+                    <label class="answer-type-radio">
+                        <input type="radio" name="answer_type" value="single" id="type_single"
+                            onclick="toggleAnswerFields('single')" {{ old('answer_type') == 'single' ? 'checked' : '' }}>
+                        <span>Single Select</span>
+                    </label>
+                
+                    <label class="answer-type-radio">
+                        <input type="radio" name="answer_type" value="multi" id="type_multi"
+                            onclick="toggleAnswerFields('multi')" {{ old('answer_type') == 'multi' ? 'checked' : '' }}>
+                        <span>Multi Select</span>
+                    </label>
+                </div>
+                @error('answer_type')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
+            {{-- TEXT TYPE --}}
+            <div id="text-answer-section" class="top-2">
+                <label>Enter Answer <span class="text-danger">*</span></label>
+                <input type="text" name="text_answer" placeholder="Enter answer here"
+                    class="custom-input form-control"
+                    value="{{ old('text_answer') }}">
+                @error('text_answer')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
+
+
+            {{-- SINGLE SELECT TYPE --}}
+            <div id="single-answer-section" class="row g-3 top-2" style="display:none;">
+                @error('correct_options')
+                    <div class="col-12">
+                        <span class="text-danger">{{ $message }}</span>
+                    </div>
+                @enderror
+                @for ($i = 0; $i < 4; $i++)
+                    <div class="col-12 col-md-6">
+                        <label>Enter Option {{ $i + 1 }} <span class="text-danger">*</span></label>
+                        <div class="d-flex gap-2 align-items-center">
+                            <input type="text" placeholder="Enter option here" class="custom-input form-control"
+                                name="single_options[]" value="{{ old('single_options.' . $i) }}">
+                            <input type="radio" class="correct-ones" name="correct_option" value="{{ $i }}"
+                                {{ old('correct_option') == $i ? 'checked' : '' }} style="width: 20px; height: 20px;">
+                        </div> 
+                    </div>
+                @endfor
+                <div class="col-12">
+                   <small class="text-muted">Select one radio button to mark the correct answer</small>
+                </div>
+            </div>
+
+            {{-- MULTI SELECT TYPE --}}
+            <div id="multi-answer-section" class="row g-3 top-2" style="display:none;">
+                @error('correct_options')
+                    <div class="col-12">
+                        <span class="text-danger">{{ $message }}</span>
+                    </div>
+                @enderror
+                @error('options')
+                    <div class="col-12">
+                        <span class="text-danger">{{ $message }}</span>
+                    </div>
+                @enderror
+                @for ($i = 0; $i < 4; $i++)
+                    <div class="col-12 col-md-6">
+                        <label>Enter Option {{ $i + 1 }} <span class="text-danger">*</span></label>
+                        <div class="d-flex gap-2 align-items-center">
+                            <input type="text" placeholder="Enter option here"
+                                class="custom-input form-control @error('multi_options.' . $i) is-invalid @enderror"
+                                name="multi_options[]" value="{{ old('multi_options.' . $i) }}">
+                            <input class="correct-ones" type="checkbox" name="correct_options[]" value="{{ $i }}"
+                                {{ in_array($i, old('correct_options', [])) ? 'checked' : '' }}
+                                style="width: 20px; height: 20px;">
+                        </div>
+                        @error('multi_options.' . $i)
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                        
+                    </div>
+                @endfor
+              <div class="col-12"> <small class="text-muted">Select at least two checkboxes to mark correct answers</small></div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-12 top-2">
+                    <label>Select Status <span class="text-danger">*</span></label>
+                    <select name="status"
+                        class="custom-input form-control">
+                        <option value="">Select Status</option>
+                      <option value="1">Active</option>
+                      <option value="0">Inactive</option>
+                      
+                    </select>
+                    @error('status')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-submit-form mt-3">
+                Add Question
+            </button>
+
+        </form>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if (old('answer_type'))
+                toggleAnswerFields('{{ old('answer_type') }}');
+            @else
+                toggleAnswerFields('text');
+            @endif
+        });
+
+        function toggleAnswerFields(type) {
+            document.getElementById('text-answer-section').style.display = (type === 'text') ? 'block' : 'none';
+            document.getElementById('single-answer-section').style.display = (type === 'single') ? 'flex' : 'none';
+            document.getElementById('multi-answer-section').style.display = (type === 'multi') ? 'flex' : 'none';
+        }
+    </script>
+@endsection

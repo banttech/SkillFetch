@@ -1,0 +1,35 @@
+[13-Jan-2026 16:02:06 Asia/Kolkata] PHP Fatal error:  Uncaught ReflectionException: Class "App\Exceptions\Handler" does not exist in /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Container/Container.php(914): ReflectionClass->__construct('App\\Exceptions\\...')
+#1 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('App\\Exceptions\\...')
+#2 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('App\\Exceptions\\...', Array, false)
+#3 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Container/Container.php(297): Illuminate\Foundation\Application->resolve('App\\Exceptions\\...', Array, false)
+#4 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Container/Container.php(910): Illuminate\Container\Container->Illuminate\Container\{closure}(Object(Illuminate\Foundation\Application), Array)
+#5 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build(Object(Closure))
+#6 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('Illuminate\\Cont...', Array, true)
+#7 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('Illuminate\\Cont...', Array)
+#8 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('Illuminate\\Cont...', Array)
+#9 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(287): Illuminate\Foundation\Application->make('Illuminate\\Cont...')
+#10 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Bootstrap\HandleExceptions->getExceptionHandler()
+#11 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#12 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#13 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#14 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [App\Exceptions\Handler] does not exist. in /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Container/Container.php:916
+Stack trace:
+#0 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('App\\Exceptions\\...')
+#1 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('App\\Exceptions\\...', Array, false)
+#2 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Container/Container.php(297): Illuminate\Foundation\Application->resolve('App\\Exceptions\\...', Array, false)
+#3 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Container/Container.php(910): Illuminate\Container\Container->Illuminate\Container\{closure}(Object(Illuminate\Foundation\Application), Array)
+#4 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build(Object(Closure))
+#5 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('Illuminate\\Cont...', Array, true)
+#6 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('Illuminate\\Cont...', Array)
+#7 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('Illuminate\\Cont...', Array)
+#8 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(287): Illuminate\Foundation\Application->make('Illuminate\\Cont...')
+#9 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Bootstrap\HandleExceptions->getExceptionHandler()
+#10 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#11 /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#12 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#13 {main}
+  thrown in /home2/shivnwqw/public_html/orker.storyofindians.com/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 916
